@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.github.m2e-core</groupId>
+  <artifactId>toolchains-988</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <java.compliance>1.8</java.compliance>
+    <maven.compiler.source>${java.compliance}</maven.compiler.source>
+    <maven.compiler.target>${java.compliance}</maven.compiler.target>
+  </properties>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-enforcer-plugin</artifactId> <version>3.4.1</version>
+        <executions>
+          <execution>
+            <goals> <goal>enforce</goal> </goals>
+            <configuration>
+              <rules>
+                <requireJavaVersion>  <version>[17,)</version>    </requireJavaVersion>
+                <requireMavenVersion> <version>[3.9.6,)</version> </requireMavenVersion>
+              </rules>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-toolchains-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <goals> <goal>toolchain</goal> </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <toolchains> <jdk> <version>[1.8,9)</version> </jdk> </toolchains>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>jaxws-maven-plugin</artifactId>
+        <version>2.6</version>
+        <executions>
+          <execution>
+            <goals> <goal>wsimport</goal> </goals>
+            <configuration>
+              <verbose>true</verbose>
+              <wsdlUrls>
+                <wsdlUrl>https://raw.githubusercontent.com/monodot/camel-demos/master/simple-tests/src/main/resources/wsdl/BookService.wsdl</wsdlUrl>
+              </wsdlUrls>
+              <packageName>fromwsdl.client</packageName>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+</project>
