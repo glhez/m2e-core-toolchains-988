@@ -6,14 +6,24 @@
   <version>1.0-SNAPSHOT</version>
 
   <properties>
-    <java.compliance>1.8</java.compliance>
     <project.build.sourceEncoding>utf-8</project.build.sourceEncoding>
+    <!--
+    <java.compliance>1.8</java.compliance>
     <maven.compiler.source>${java.compliance}</maven.compiler.source>
     <maven.compiler.target>${java.compliance}</maven.compiler.target>
+    -->
   </properties>
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-compiler-plugin</artifactId> <version>3.11.0</version>
+        <configuration>
+          <jdkToolchain>
+            <version>[21,)</version>
+          </jdkToolchain>
+        </configuration>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-enforcer-plugin</artifactId> <version>3.4.1</version>
         <executions>
